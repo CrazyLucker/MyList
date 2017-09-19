@@ -1,0 +1,86 @@
+package com.company;
+
+
+import java.util.Arrays;
+
+public class MyList {
+    private int[] list;
+
+    public MyList() {
+        list = new int[0];
+        }
+
+    int size() {
+        return list.length;
+    }
+
+    int searchByIndex(int index) {
+        return list[index];
+    }
+
+    int searchByValue(int value){
+        for (int i = 0; i < list.length; i++) {
+            if (list[i] == value){ return i;}
+
+        }
+        return -1;
+    }
+
+    void add(int number) {
+        int[] temp = list;
+        list = new int[temp.length+1];
+        System.arraycopy(temp, 0, list, 0, temp.length);
+        list[list.length-1] = number;
+        for (int i = 0; i < list.length-1; i++){
+            list[i] = list[i] + number;
+        }
+    }
+
+    void delete(int number) {
+        if (searchByValue(number) != -1) {
+            int[] temp = new int[list.length - 1];
+            System.arraycopy(list, 0, temp, 0, temp.length);
+            list = temp;
+            for (int i = 0; i<list.length; i++){
+                list[i] = list[i] - number;
+            }
+        }
+        else System.out.println("No such value");
+
+    }
+
+    int getMin(){
+        int min = list[0];
+        for (int i = 0; i<list.length; i++){
+            if (min > list[i]){
+                min = list[i];
+            }
+        }
+        return min;
+    }
+
+    int getMax(){
+        int max = list[0];
+        for (int i = 0; i<list.length; i++){
+            if (max < list[i]){
+                max = list[i];
+            }
+        }
+        return max;
+    }
+
+    double average(){
+        double sum = 0;
+        for (int i = 0; i<list.length; i++){
+            sum = list[i] + sum;
+        }
+        return sum/list.length;
+    }
+
+    @Override
+    public String toString() {
+        return Arrays.toString(list);
+    }
+}
+
+
